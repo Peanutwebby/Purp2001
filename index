@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Purp</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Special Elite', cursive;
+background:
+radial-gradient(circle at top,#5d3a7a 0%,#2c2335 45%,#16141c 100%);
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+padding:20px;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(255,255,255,0.03),
+rgba(255,255,255,0.03) 1px,
+transparent 1px,
+transparent 3px
+);
+pointer-events:none;
+z-index:999;
+}
+
+.screen{
+width:100%;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.window{
+width:100%;
+max-width:900px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(14px);
+border:2px solid rgba(255,255,255,0.15);
+border-radius:28px;
+padding:25px;
+box-shadow:
+0 0 30px rgba(184,120,255,0.35),
+0 0 80px rgba(0,0,0,0.5);
+position:relative;
+overflow:hidden;
+}
+
+.window::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:35px;
+background:rgba(255,255,255,0.06);
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.dots{
+position:absolute;
+top:11px;
+left:15px;
+display:flex;
+gap:7px;
+}
+
+.dot{
+width:11px;
+height:11px;
+border-radius:50%;
+background:#ddd;
+opacity:0.7;
+}
+
+.center{
+display:flex;
+flex-direction:column;
+gap:25px;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding-top:35px;
+}
+
+.title{
+font-size:clamp(22px,5vw,38px);
+line-height:1.5;
+}
+
+.input{
+width:100%;
+max-width:350px;
+padding:15px;
+border:none;
+outline:none;
+border-radius:18px;
+font-size:16px;
+font-family:'Special Elite', cursive;
+background:rgba(255,255,255,0.12);
+color:white;
+text-align:center;
+border:1px solid rgba(255,255,255,0.15);
+}
+
+.input::placeholder{
+color:#ddd;
+}
+
+.buttonRow{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:18px;
+width:100%;
+}
+
+button{
+font-family:'Special Elite', cursive;
+border:none;
+cursor:pointer;
+transition:0.25s ease;
+padding:15px 24px;
+border-radius:18px;
+font-size:16px;
+background:rgba(255,255,255,0.1);
+color:white;
+border:1px solid rgba(255,255,255,0.15);
+min-width:140px;
+}
+
+button:hover{
+transform:scale(1.05);
+background:rgba(255,255,255,0.18);
+}
+
+.hidden{
+display:none;
+}
+
+.errorScreen{
+position:fixed;
+inset:0;
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-size:clamp(24px,5vw,42px);
+z-index:99999;
+animation:glitch 0.2s infinite;
+text-align:center;
+padding:20px;
+}
+
+@keyframes glitch{
+0%{transform:translate(0);}
+20%{transform:translate(-2px,2px);}
+40%{transform:translate(2px,-2px);}
+60%{transform:translate(-1px,1px);}
+80%{transform:translate(1px,-1px);}
+100%{transform:translate(0);}
+}
+
+.cardWrap{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:22px;
+margin-top:25px;
+padding-top:35px;
+}
+
+.card{
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.15);
+border-radius:24px;
+padding:20px;
+height:520px;
+overflow-y:auto;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.cardTitle{
+font-size:22px;
+margin-bottom:20px;
+text-align:center;
+line-height:1.5;
+}
+
+.text{
+line-height:2;
+font-size:15px;
+white-space:pre-wrap;
+}
+
+.question{
+margin-top:18px;
+margin-bottom:10px;
+line-height:1.7;
+}
+
+.answer{
+width:100%;
+min-height:100px;
+border:none;
+outline:none;
+resize:vertical;
+border-radius:18px;
+padding:15px;
+font-family:'Special Elite', cursive;
+font-size:14px;
+background:rgba(255,255,255,0.1);
+color:white;
+border:1px solid rgba(255,255,255,0.15);
+}
+
+.submitWrap{
+display:flex;
+justify-content:center;
+margin-top:30px;
+padding-bottom:20px;
+}
+
+.submitBtn{
+padding:16px 45px;
+font-size:18px;
+}
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+background:rgba(255,255,255,0.3);
+border-radius:20px;
+}
+
+@media(max-width:768px){
+
+body{
+padding:12px;
+}
+
+.window{
+padding:18px;
+border-radius:24px;
+}
+
+.card{
+height:450px;
+}
+
+button{
+width:100%;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="loginScreen" class="screen">
+
+<div class="window">
+
+<div class="dots">
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+</div>
+
+<div class="center">
+
+<div class="title">
+Hi, and who are you?
+</div>
+
+<input
+type="text"
+id="nameInput"
+class="input"
+/>
+
+<button onclick="checkName()">
+done
+</button>
+
+</div>
+</div>
+</div>
+
+<div id="mainScreen" class="screen hidden">
+
+<div class="window">
+
+<div class="dots">
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+</div>
+
+<div class="center">
+
+<div class="title">
+Will you let me subscribe again?
+</div>
+
+<div class="buttonRow">
+
+<button id="yesBtn" onclick="openCards()">
+YES
+</button>
+
+<button id="noBtn" onclick="changeNoText()">
+NO
+</button>
+
+</div>
+
+</div>
+
+<div id="cardsSection" class="hidden">
+
+<form
+action="https://formsubmit.co/Nothingnessnot1999@gmail.com"
+method="POST"
+>
+
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+
+<div class="cardWrap">
+
+<div class="card">
+
+<div class="cardTitle">
+Why do I like you
+</div>
+
+<div class="text">
+About sa question mo… nahihirapan akong sagutin kasi ang daming reasons why I like you. And siguro ’yon din yung reason bakit ako natatakot minsan—kasi ang daming pwedeng magustuhan sa ’yo, and ang daming taong pwedeng magka-interest sa ’yo. What if may dumating na someone better? I mean, technically laging may mas better naman talaga, pero what if mas maging interesting sila for you? Natatakot lang ako na baka masaktan ulit the same way na nasaktan ako before.
+
+Pero going back sa question mo—why do I like you?
+
+Magsisinungaling ako if sasabihin kong hindi ako unang na-attract sa ’yo because of your beauty and brains. You really have both. Pero habang mas nakikilala kita, mas nare-realize ko na parang hindi mo alam kung gaano kadaling mahulog sa ’yo.
+
+Siguro dahil sa humor mo, sa way mo makipag-usap sa tao, and sa pagiging witty mo. Yung tipong entertaining ka kausap pero may substance rin—especially kapag politics or random serious topics pinag-uusapan natin.
+I like how ayaw mong may nale-left behind. Tapos yung voice mo… especially when you sing? Ugh, music to my ears talaga, eme HAHAHA.
+
+I also like how hindi ka takot matuto at mag-improve. Hindi ka rin takot maging sarili mo, kahit “jejemon” minsan. Ang cute mo sa part na ’yon, honestly. Tapos ang cute mo rin kapag inaasar ka tapos bigla kang magtatampo or lalayo. Ang sarap mong asarin minsan.
+
+And 'yong passion mo sa program mo? Sobrang attractive no’n for me. Also, na-appreciate ko rin na naalala mo favorite song ko. Maliit na bagay siya for other people pero I just think it's cute.
+
+But honestly, hindi ko pa masasabi na sobrang down bad na ako… that scares me kasi. What if dumating ako sa point na 'yon? Will it ruin me again?
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="cardTitle">
+I’m interested in the lore.
+</div>
+
+<div class="question">
+1. Fei shang, gao shing, chi, shishyang, Chonghu, Guaja, Jushi, Xijingpin, Chunguju, Frelupin, Tashir?
+</div>
+
+<textarea
+name="Question 1"
+class="answer"
+></textarea>
+
+<div class="question">
+2. I’m trying to unlock your lore a little. What’s something about you people don’t notice right away?
+</div>
+
+<textarea
+name="Question 2"
+class="answer"
+></textarea>
+
+<div class="question">
+3. I feel like there’s more to you than the aesthetic. What kind of person are you when you’re fully comfortable?
+</div>
+
+<textarea
+name="Question 3"
+class="answer"
+></textarea>
+
+<div class="question">
+4. You seem interesting beyond the surface level. What’s something you could talk about for hours?
+</div>
+
+<textarea
+name="Question 4"
+class="answer"
+></textarea>
+
+</div>
+
+</div>
+
+<div class="submitWrap">
+
+<button
+type="submit"
+class="submitBtn"
+>
+done
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+function checkName(){
+
+const value =
+document.getElementById("nameInput")
+.value
+.trim();
+
+if(value === "Purp"){
+
+document
+.getElementById("loginScreen")
+.classList.add("hidden");
+
+document
+.getElementById("mainScreen")
+.classList.remove("hidden");
+
+}else{
+
+document.body.innerHTML = `
+<div class="errorScreen">
+<div>This is not for you!</div>
+</div>
+`;
+
+}
+
+}
+
+const noTexts = [
+"Really?",
+"Are you sure?",
+"Iz dat your final answer?",
+"Ihh, ayaw! Sure na ba?",
+"YES"
+];
+
+let clickCount = 0;
+
+function changeNoText(){
+
+const btn =
+document.getElementById("noBtn");
+
+btn.innerText = noTexts[clickCount];
+
+clickCount++;
+
+if(clickCount >= noTexts.length){
+
+btn.onclick = openCards;
+
+}
+
+}
+
+function openCards(){
+
+document
+.getElementById("cardsSection")
+.classList.remove("hidden");
+
+document
+.getElementById("cardsSection")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+</script>
+
+</body>
+</html>
