@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Retro Violet</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Special Elite', cursive;
+    background:
+    radial-gradient(circle at top, #5b3a88 0%, #1a1a1a 40%, #000 100%);
+    color:#f5f5f5;
+    overflow-x:hidden;
+    min-height:100vh;
+}
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#8b6bb8;
+    border-radius:10px;
+}
+
+.page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.container{
+    width:100%;
+    max-width:900px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 0 30px rgba(128,0,255,0.2);
+}
+
+.center{
+    text-align:center;
+}
+
+.title{
+    font-size:clamp(1.6rem, 4vw, 2.8rem);
+    margin-bottom:25px;
+    color:#fff;
+}
+
+.inputBox{
+    width:100%;
+    padding:16px;
+    border:none;
+    outline:none;
+    border-radius:15px;
+    background:#111;
+    color:#fff;
+    font-size:1rem;
+    margin-bottom:20px;
+    font-family:'Special Elite', cursive;
+}
+
+.btn{
+    padding:15px 25px;
+    border:none;
+    border-radius:15px;
+    background:#7c58b8;
+    color:white;
+    cursor:pointer;
+    font-family:'Special Elite', cursive;
+    transition:0.3s;
+    margin:10px;
+    font-size:1rem;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+    background:#9a70e0;
+}
+
+.warning{
+    margin-top:15px;
+    color:#fff;
+    font-size:1rem;
+}
+
+.choiceBox{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    border-radius:20px;
+    padding:20px;
+    border:1px solid rgba(255,255,255,0.1);
+    max-height:75vh;
+    overflow-y:auto;
+}
+
+.card h2{
+    margin-bottom:20px;
+    text-align:center;
+    color:#d9c2ff;
+}
+
+.textContent{
+    line-height:2;
+    white-space:pre-wrap;
+    font-size:0.95rem;
+}
+
+.question{
+    margin-bottom:25px;
+}
+
+.question p{
+    margin-bottom:10px;
+    line-height:1.7;
+}
+
+textarea{
+    width:100%;
+    min-height:120px;
+    resize:vertical;
+    border:none;
+    outline:none;
+    border-radius:15px;
+    padding:15px;
+    background:#111;
+    color:white;
+    font-family:'Special Elite', cursive;
+}
+
+.doneBtn{
+    width:100%;
+    margin-top:15px;
+}
+
+.fade{
+    animation:fade 0.6s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:600px){
+    .container{
+        padding:20px;
+    }
+
+    .card{
+        max-height:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- WELCOME -->
+<section class="page" id="welcomePage">
+    <div class="container center fade">
+
+        <div class="title">
+            Hi, and who are you?
+        </div>
+
+        <input type="text" id="nameInput" class="inputBox">
+
+        <button class="btn" onclick="checkName()">
+            done
+        </button>
+
+        <div class="warning" id="warningText"></div>
+
+    </div>
+</section>
+
+<!-- SECOND -->
+<section class="page hidden" id="questionPage">
+    <div class="container center fade">
+
+        <div class="title">
+            Will you let me subscribe again?
+        </div>
+
+        <div class="choiceBox">
+            <button class="btn" onclick="openMain()">
+                YES
+            </button>
+
+            <button class="btn" id="noBtn" onclick="changeNoText()">
+                NO
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<!-- MAIN -->
+<section class="page hidden" id="mainPage">
+
+<div class="container fade">
+
+<form action="https://formsubmit.co/Nothingnessnot1999@gmail.com" method="POST">
+
+<div class="grid">
+
+<!-- FIRST BOX -->
+<div class="card">
+
+<h2>
+Why do I like you
+</h2>
+
+<div class="textContent">
+About sa question mo… nahihirapan akong sagutin kasi ang daming reasons why I like you. And siguro ’yon din yung reason bakit ako natatakot minsan—kasi ang daming pwedeng magustuhan sa ’yo, and ang daming taong pwedeng magka-interest sa ’yo. What if may dumating na someone better? I mean, technically laging may mas better naman talaga, pero what if mas maging interesting sila for you? Natatakot lang ako na baka masaktan ulit the same way na nasaktan ako before.
+
+Pero going back sa question mo—why do I like you?
+
+Magsisinungaling ako if sasabihin kong hindi ako unang na-attract sa ’yo because of your beauty and brains. You really have both. Pero habang mas nakikilala kita, mas nare-realize ko na parang hindi mo alam kung gaano kadaling mahulog sa ’yo.
+
+Siguro dahil sa humor mo, sa way mo makipag-usap sa tao, and sa pagiging witty mo. Yung tipong entertaining ka kausap pero may substance rin—especially kapag politics or random serious topics pinag-uusapan natin.
+I like how ayaw mong may nale-left behind. Tapos yung voice mo… especially when you sing? Ugh, music to my ears talaga, eme HAHAHA.
+
+I also like how hindi ka takot matuto at mag-improve. Hindi ka rin takot maging sarili mo, kahit “jejemon” minsan. Ang cute mo sa part na ’yon, honestly. Tapos ang cute mo rin kapag inaasar ka tapos bigla kang magtatampo or lalayo. Ang sarap mong asarin minsan.
+
+And 'yong passion mo sa program mo? Sobrang attractive no’n for me. Also, na-appreciate ko rin na naalala mo favorite song ko. Maliit na bagay siya for other people pero I just think it's cute.
+
+But honestly, hindi ko pa masasabi na sobrang down bad na ako… that scares me kasi. What if dumating ako sa point na 'yon? Will it ruin me again?
+</div>
+
+</div>
+
+<!-- SECOND BOX -->
+<div class="card">
+
+<h2>
+I’m interested in the lore.
+</h2>
+
+<div class="question">
+<p>
+1. Fei shang, gao shing, chi, shishyang, Chonghu, Guaja, Jushi, Xijingpin, Chunguju, Frelupin, Tashir?
+</p>
+
+<textarea name="Question1"></textarea>
+</div>
+
+<div class="question">
+<p>
+2. I’m trying to unlock your lore a little. What’s something about you people don’t notice right away?
+</p>
+
+<textarea name="Question2"></textarea>
+</div>
+
+<div class="question">
+<p>
+3. I feel like there’s more to you than the aesthetic. What kind of person are you when you’re fully comfortable?
+</p>
+
+<textarea name="Question3"></textarea>
+</div>
+
+<div class="question">
+<p>
+4. You seem interesting beyond the surface level. What’s something you could talk about for hours?
+</p>
+
+<textarea name="Question4"></textarea>
+</div>
+
+<button class="btn doneBtn" type="submit">
+done
+</button>
+
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+
+<script>
+
+function checkName(){
+
+    const input = document.getElementById("nameInput").value.trim();
+    const warning = document.getElementById("warningText");
+
+    if(input.toLowerCase() === "purp"){
+        document.getElementById("welcomePage").classList.add("hidden");
+        document.getElementById("questionPage").classList.remove("hidden");
+    } else {
+        warning.innerText = "This is not for you!";
+    }
+}
+
+const noTexts = [
+    "Really?",
+    "Are you sure?",
+    "Iz dat your final answer?",
+    "Ihh, ayaw! Sure na ba?",
+    "YES"
+];
+
+let clickCount = 0;
+
+function changeNoText(){
+
+    const btn = document.getElementById("noBtn");
+
+    if(clickCount < noTexts.length){
+        btn.innerText = noTexts[clickCount];
+        clickCount++;
+    } else {
+        openMain();
+    }
+
+    if(btn.innerText === "YES"){
+        btn.onclick = openMain;
+    }
+}
+
+function openMain(){
+    document.getElementById("questionPage").classList.add("hidden");
+    document.getElementById("mainPage").classList.remove("hidden");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
