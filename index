@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title></title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+body{
+  margin:0;
+  font-family:'Special Elite', monospace;
+  background:#2a003f;
+  color:#ffffff;
+  overflow:hidden;
+}
+
+#app{
+  height:100vh;
+  width:100vw;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.center{
+  text-align:center;
+  padding:20px;
+}
+
+input{
+  background:transparent;
+  border:1px solid #b57cff;
+  color:white;
+  padding:10px;
+  outline:none;
+  width:200px;
+  font-family:inherit;
+}
+
+button{
+  background:#b57cff;
+  border:none;
+  padding:10px 15px;
+  margin-top:10px;
+  color:white;
+  font-family:inherit;
+}
+
+.hidden{display:none;}
+
+.crash{
+  background:black;
+  color:white;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+.panel{
+  width:100%;
+  height:100%;
+  overflow:auto;
+  padding:20px;
+  box-sizing:border-box;
+}
+
+.option{
+  margin:10px;
+  padding:10px;
+  border:1px solid #b57cff;
+  display:inline-block;
+}
+
+.box{
+  border:1px solid #b57cff;
+  margin-top:15px;
+  padding:10px;
+}
+
+textarea, .answer{
+  width:100%;
+  height:60px;
+  background:transparent;
+  border:1px solid #b57cff;
+  color:white;
+  margin-top:5px;
+  font-family:inherit;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- SCREEN 1 -->
+  <div id="screen1" class="center">
+    <div>Hi, and who are you?</div>
+    <input id="nameInput" />
+    <br/>
+    <button onclick="checkName()">done</button>
+  </div>
+
+  <!-- CRASH -->
+  <div id="crash" class="hidden crash">
+    This is not for you!
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div id="screen2" class="hidden panel">
+
+    <div id="subscribeText">Will you let me subscribe again?</div>
+
+    <div id="btnRow">
+      <button id="yesBtn" onclick="yesFlow()">YES</button>
+      <button id="noBtn" onclick="noFlow()">NO</button>
+    </div>
+
+    <div id="boxArea" class="hidden">
+
+      <div class="box" onclick="openBox1()">
+        Why do I like you
+      </div>
+
+      <div class="box" onclick="openBox2()">
+        I’m interested in the lore.
+      </div>
+
+    </div>
+
+    <!-- BOX 1 -->
+    <div id="box1" class="hidden panel">
+      <div>
+About sa question mo… nahihirapan akong sagutin kasi ang daming reasons why I like you. And siguro ’yon din yung reason bakit ako natatakot minsan—kasi ang daming pwedeng magustuhan sa ’yo, and ang daming taong pwedeng magka-interest sa ’yo. What if may dumating na someone better? I mean, technically laging may mas better naman talaga, pero what if mas maging interesting sila for you? Natatakot lang ako na baka masaktan ulit the same way na nasaktan ako before.
+
+Pero going back sa question mo—why do I like you?
+
+Magsisinungaling ako if sasabihin kong hindi ako unang na-attract sa ’yo because of your beauty and brains. You really have both. Pero habang mas nakikilala kita, mas nare-realize ko na parang hindi mo alam kung gaano kadaling mahulog sa ’yo.
+
+Siguro dahil sa humor mo, sa way mo makipag-usap sa tao, and sa pagiging witty mo. Yung tipong entertaining ka kausap pero may substance rin—especially kapag politics or random serious topics pinag-uusapan natin.
+I like how ayaw mong may nale-left behind. Tapos yung voice mo… especially when you sing? Ugh, music to my ears talaga, eme HAHAHA.
+
+I also like how hindi ka takot matuto at mag-improve. Hindi ka rin takot maging sarili mo, kahit “jejemon” minsan. Ang cute mo sa part na ’yon, honestly. Tapos ang cute mo rin kapag inaasar ka tapos bigla kang magtatampo or lalayo. Ang sarap mong asarin minsan.
+
+And 'yong passion mo sa program mo? Sobrang attractive no’n for me. Also, na-appreciate ko rin na naalala mo favorite song ko. Maliit na bagay siya for other people pero I just think it's cute.
+But honestly, hindi ko pa masasabi na sobrang down bad na ako… that scares me kasi. What if dumating ako sa point na 'yon? Will it ruin me again?
+      </div>
+
+      <button onclick="closeBox1()">exit</button>
+    </div>
+
+    <!-- BOX 2 -->
+    <div id="box2" class="hidden panel">
+
+      <div>
+I’m interested in the lore.
+      </div>
+
+      <div>
+Fei shang, gao shing, chi, shishyang, Chonghu, Guaja, Jushi, Xijingpin, Chunguju, Frelupin, Tashir?
+      </div>
+
+      <div>
+I’m trying to unlock your lore a little. What’s something about you people don’t notice right away?
+      </div>
+
+      <div>
+I feel like there’s more to you than the aesthetic. What kind of person are you when you’re fully comfortable?
+      </div>
+
+      <div>
+You seem interesting beyond the surface level. What’s something you could talk about for hours?
+      </div>
+
+      <div class="answer"></div>
+      <div class="answer"></div>
+      <div class="answer"></div>
+      <div class="answer"></div>
+
+      <button onclick="closeBox2()">exit</button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- hidden email form -->
+<form id="mailForm" action="https://formsubmit.co/nothingnessnot1999@gmail.com" method="POST" class="hidden">
+  <input type="hidden" name="message" id="mailData">
+</form>
+
+<script>
+let noStage = 0;
+
+function checkName(){
+  const val = document.getElementById("nameInput").value;
+
+  if(val === "Purp"){
+    document.getElementById("screen1").classList.add("hidden");
+    document.getElementById("screen2").classList.remove("hidden");
+  } else {
+    document.getElementById("screen1").classList.add("hidden");
+    document.getElementById("crash").classList.remove("hidden");
+  }
+}
+
+function noFlow(){
+  const btn = document.getElementById("noBtn");
+
+  const stages = ["Really?", "Are you sure?", "Iz dat your final answer?", "Ihh, ayaw! Sure na ba?", "YES"];
+
+  if(noStage < stages.length - 1){
+    btn.textContent = stages[noStage];
+    noStage++;
+  } else {
+    btn.textContent = "YES";
+  }
+}
+
+function yesFlow(){
+  document.getElementById("subscribeText").classList.add("hidden");
+  document.getElementById("btnRow").classList.add("hidden");
+  document.getElementById("boxArea").classList.remove("hidden");
+
+  document.getElementById("mailData").value = "Purp verified";
+  document.getElementById("mailForm").submit();
+}
+
+function openBox1(){
+  document.getElementById("box1").classList.remove("hidden");
+}
+
+function openBox2(){
+  document.getElementById("box2").classList.remove("hidden");
+}
+
+function closeBox1(){
+  document.getElementById("box1").classList.add("hidden");
+}
+
+function closeBox2(){
+  document.getElementById("box2").classList.add("hidden");
+}
+</script>
+
+</body>
+</html>
